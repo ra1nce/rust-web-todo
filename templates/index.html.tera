@@ -1,0 +1,27 @@
+{% extends "base" %}
+
+{% block content %}
+    <div class="content">
+        <div>
+            <form action="" method="POST">
+                <input id="task" type="text" name="task" placeholder="Новая задача">
+                <input id="btn-add-task" type="submit" value="ADD">
+            </form>
+            
+            {% for task in tasks %}
+                <div class="task">
+                    <p class="task-text">{{ task.text }}</p>
+                    
+                    {% if task.state == "false" %}
+                        <a href="/api/ok?id={{ task.id }}" class="btn-ok"><p>OK</p></a>
+                    {% else %}
+                        <a href="/api/undo?id={{ task.id }}" class="btn-undo"><p>UNDO</p></a>
+                        <a href="/api/del?id={{ task.id }}" class="btn-del"><p>DEL</p></a>
+                    {% endif %}
+                </div>
+                
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+
